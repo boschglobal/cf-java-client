@@ -121,6 +121,7 @@ public final class ClientsTest extends AbstractIntegrationTest {
                                                 .authorizedGrantType(PASSWORD)
                                                 .clientId(clientId1)
                                                 .clientSecret(clientSecret)
+                                                .allowPublic(true)
                                                 .scopes("client.read", "client.write")
                                                 .tokenSalt("test-token-salt")
                                                 .build())
@@ -145,6 +146,7 @@ public final class ClientsTest extends AbstractIntegrationTest {
                             assertThat(response.getScopes())
                                     .containsExactly("client.read", "client.write");
                             assertThat(response.getTokenSalt()).isEqualTo("test-token-salt");
+                            assertThat(response.getAllowPublic()).isTrue();
                         })
                 .expectComplete()
                 .verify(Duration.ofMinutes(5));
